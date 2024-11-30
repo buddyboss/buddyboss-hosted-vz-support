@@ -40,6 +40,9 @@ wp plugin activate litespeed-cache --quiet
 # │ Configure litespeed for Rapyd!                                           │
 # └──────────────────────────────────────────────────────────────────────────┘
 
+# Delete existing LS Cache config
+wp db query "DELETE FROM $(wp db prefix)_options WHERE option_name LIKE 'litespeed.%';"
+
 wp litespeed-option set object false --quiet --skip-plugins="$SKIPLIST" 2>/dev/null  
 wp litespeed-option set cache true --quiet --skip-plugins="$SKIPLIST" 2>/dev/null
 wp litespeed-option set cache-priv false --quiet --skip-plugins="$SKIPLIST" 2>/dev/null
